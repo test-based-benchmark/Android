@@ -549,6 +549,7 @@ tasks.register('lint_check') {
 
 tasks.register('jvm_tests') {
     dependsOn 'testPlayDebugUnitTest'
+    dependsOn tasks.named("koverXmlReport")
 }
 
 tasks.register('androidTestsBuild') {

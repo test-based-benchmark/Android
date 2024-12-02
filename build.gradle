@@ -35,6 +35,7 @@ plugins {
     id 'org.jmailen.kotlinter' apply false
     id 'com.google.devtools.ksp' apply false
     id 'com.diffplug.spotless' apply false
+    id 'org.jetbrains.kotlinx.kover' version '0.8.3'
 }
 
 allprojects {
@@ -49,6 +50,9 @@ allprojects {
 }
 
 subprojects {
+    afterEvaluate { subproject ->
+        subproject.apply plugin: 'org.jetbrains.kotlinx.kover'
+    }
 
     if (project.name.endsWith("api")) {
         apply plugin: 'org.jetbrains.dokka'
@@ -189,3 +193,9 @@ fladle {
 }
 
 apply plugin: 'android-reporting'
+
+kover {
+    merge {
+        subprojects { true }
+    }
+}
